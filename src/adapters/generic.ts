@@ -145,6 +145,8 @@ class GenericAdapter implements BackendAdapter {
                 ? item.context_length
                 : typeof item.max_context_length === "number" && item.max_context_length > 0
                   ? item.max_context_length
+                  // Ceiling (Lemonade max_context_window). Last, so a runtime
+                  // context_length still wins when the server sends both.
                   : typeof item.max_context_window === "number" && item.max_context_window > 0
                     ? item.max_context_window
                     : undefined;
